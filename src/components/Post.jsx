@@ -38,10 +38,10 @@ function Post({ title, score, author, num_comments, created_utc}) {
   }
 
   return (
-    <div className="flex flex-col items-center gap-4 mb-8 border border-red-600">
-      <h4 className="font-bold">{title}</h4>
+    <div className="flex flex-col items-center text-center gap-4 mb-8 max-w-6xl m-auto shadow shadow-slate-500 p-5 xl:p-2">
+      <h4 className="font-bold text-xl">{title}</h4>
       <img src={""} alt=""/>
-      <div className="flex gap-5">
+      <div className="flex w-full justify-between border-red-500 ">
         <p>{score}</p>
         <p>{author}</p>
         <p>{convertUTC(created_utc)}</p>
