@@ -1,4 +1,5 @@
 import SubredditNav from "./SubredditNav";
+import DarkMode from "./DarkMode";
 
 function Header() {
   return (
@@ -13,12 +14,14 @@ function Header() {
             className="block w-full px-4 py-2 rounded-md text-blue-600 bg-white  focus:border-blue-600 focus:ring-blue-600 focus:outline-none focus:ring focus:ring-opacity-40"
             placeholder="Search..."
           />
-          <button className="px-4 text-black bg-white rounded-md">
+          <button className="px-4 text-black bg-white rounded-md hover:bg-slate-200 hover:cursor-pointer">
             Search
           </button>
         </div>
       </div>
-      <SubredditNav />
+      <div className="flex items-center">
+        <DarkMode />
+      </div>
     </header>
   );
 }
