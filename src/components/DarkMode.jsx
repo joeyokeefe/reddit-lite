@@ -2,7 +2,7 @@ function DarkMode() {
   return (
     <div>
       <svg
-        className="h-6"
+        className="h-7"
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
       >

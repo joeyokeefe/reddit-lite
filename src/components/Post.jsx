@@ -1,3 +1,8 @@
+import comment from "../assets/comment.svg";
+import clock from "../assets/clock.svg";
+import user from "../assets/user.svg";
+import upvote from "../assets/upvote.svg";
+
 function Post({
   title,
   score,
@@ -49,11 +54,23 @@ function Post({
       <h4 className="font-bold text-xl">{title}</h4>
       <h5>{subreddit_name}</h5>
       {/*{post_image && <img className="object-cover" src={post_image} alt="" />}*/}
-      <div className="flex w-full justify-between border-red-500 ">
-        <p>{score}</p>
-        <p>{author}</p>
-        <p>{convertUTC(created_utc)}</p>
-        <p>{num_comments}</p>
+      <div className="flex w-full justify-between">
+        <div className="flex items-center gap-1">
+          <img className="h-3" src={upvote} alt="" />
+          <p className="text-xs md:text-sm">{score}</p>
+        </div>
+        <div className="flex items-center gap-1">
+          <img className="h-3" src={user} alt="" />
+          <p className="text-xs md:text-sm">{author}</p>
+        </div>
+        <div className="flex items-center gap-1">
+          <img className="h-3" src={clock} alt="" />
+          <p className="text-xs md:text-sm">{convertUTC(created_utc)}</p>
+        </div>
+        <div className="flex items-center gap-1">
+          <img src={comment} alt="" />
+          <p className="text-xs md:text-sm">{num_comments}</p>
+        </div>
       </div>
     </div>
   );
