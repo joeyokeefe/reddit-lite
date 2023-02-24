@@ -1,5 +1,4 @@
-function Post({ title, score, author, num_comments, created_utc}) {
-
+function Post({ title, score, author, num_comments, created_utc }) {
   function convertUTC(created) {
     // Convert the UTC time string to a Date object
     const date = new Date(created * 1000);
@@ -38,9 +37,9 @@ function Post({ title, score, author, num_comments, created_utc}) {
   }
 
   return (
-    <div className="flex flex-col items-center text-center gap-4 mb-8 max-w-6xl m-auto shadow shadow-slate-500 p-5 xl:p-2">
+    <div className="flex flex-col items-center text-center gap-4 mb-8 m-auto shadow shadow-slate-500 p-5 xl:p-2 xl:max-w-6xl">
       <h4 className="font-bold text-xl">{title}</h4>
-      <img src={""} alt=""/>
+      <img src={""} alt="" />
       <div className="flex w-full justify-between border-red-500 ">
         <p>{score}</p>
         <p>{author}</p>
@@ -48,7 +47,7 @@ function Post({ title, score, author, num_comments, created_utc}) {
         <p>{num_comments}</p>
       </div>
     </div>
-  )
+  );
 }
 
-export default Post
+export default Post;

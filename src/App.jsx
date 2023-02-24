@@ -6,6 +6,7 @@ import SubredditNav from "./components/SubredditNav.jsx";
 function App() {
   const [posts, setPosts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [subreddits, setSubreddits] = useState([]);
 
   useEffect(() => {
     fetch("https://ww.reddit.com/r/popular.json")
@@ -13,9 +14,15 @@ function App() {
       .then((postsArr) => setPosts(postsArr.data.children));
   }, []);
 
+  useEffect(() => {
+    fetch("https://www.reddit.com/subreddits/default.json")
+      .then((res) => res.json())
+      .then((subredditsArr) => setSubreddits(subredditsArr.data.children));
+  }, []);
+
   return (
     <div>
-      <Header />
+      <Header setIsOpen={setIsOpen} />
       <div className="relative flex justify-center">
         <div className="mx-4">
           {posts.map((post) => (
@@ -29,16 +36,8 @@ function App() {
             />
           ))}
         </div>
-        <div
-          className="p-4 space-y-1.5 max-h-12 bg-white rounded border shadow shadow-slate-500 hover:bg-slate-200 hover:cursor-pointer"
-          onClick={() => setIsOpen((prev) => !prev)}
-        >
-          <div className="block w-8 h-0.5 max-h-0.5 min-h-0.5 bg-gray-700"></div>
-          <div className="block w-8 h-0.5 max-h-0.5 min-h-0.5 bg-gray-700"></div>
-          <div className="block w-8 h-0.5 max-h-0.5 min-h-0.5 bg-gray-700"></div>
-        </div>
-        {isOpen && <SubredditNav />}
       </div>
+      {isOpen && <SubredditNav subreddits={subreddits} />}
     </div>
   );
 }
