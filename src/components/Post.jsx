@@ -1,4 +1,12 @@
-function Post({ title, score, author, num_comments, created_utc }) {
+function Post({
+  title,
+  score,
+  author,
+  num_comments,
+  created_utc,
+  post_image,
+  subreddit_name,
+}) {
   function convertUTC(created) {
     // Convert the UTC time string to a Date object
     const date = new Date(created * 1000);
@@ -39,7 +47,8 @@ function Post({ title, score, author, num_comments, created_utc }) {
   return (
     <div className="flex flex-col items-center text-center gap-4 mb-8 m-auto shadow shadow-slate-500 p-5 xl:p-2 xl:max-w-6xl">
       <h4 className="font-bold text-xl">{title}</h4>
-      <img src={""} alt="" />
+      <h5>{subreddit_name}</h5>
+      {/*{post_image && <img className="object-cover" src={post_image} alt="" />}*/}
       <div className="flex w-full justify-between border-red-500 ">
         <p>{score}</p>
         <p>{author}</p>
