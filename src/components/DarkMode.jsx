@@ -30,7 +30,7 @@ function DarkMode({ darkMode, setDarkMode }) {
           height="30"
           viewBox="0 0 24 24"
           stroke-width="2"
-          stroke="currentColor"
+          stroke="white"
           fill="none"
           stroke-linecap="round"
           stroke-linejoin="round"

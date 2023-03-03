@@ -37,7 +37,7 @@ function App() {
         darkMode={darkMode}
         setDarkMode={setDarkMode}
       />
-      <div className="relative flex flex-col justify-center md:flex-row-reverse">
+      <div className="relative flex flex-col justify-center md:flex-row-reverse dark:bg-slate-800">
         {isOpen && <SubredditNav subreddits={subreddits} />}
         <div className="mx-4 mt-8">
           {posts.map((post) => (

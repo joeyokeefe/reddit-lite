@@ -2,12 +2,12 @@ import defaultSubredditIcon from "../assets/defaultSubredditIcon.svg";
 
 function SubredditNav({ subreddits }) {
   return (
-    <div className="bg-slate-400 p-6 h-full text-center mb-4 w-80 self-end absolute right-0 top-0 border">
+    <div className="bg-slate-400 p-6 text-center mb-4 w-80 self-end absolute right-0 top-0 dark:text-white dark:bg-slate-900">
       <h2 className="text-2xl font-bold mb-8">Subreddits</h2>
       {subreddits.map((subreddit) => (
         <div
           key={subreddit.data.id}
-          className="text-lg mb-6 flex flex-nowrap font-semibold cursor-pointer"
+          className="text-lg mt-6 flex flex-nowrap font-semibold cursor-pointer"
         >
           {subreddit.data.icon_img ? (
             <img

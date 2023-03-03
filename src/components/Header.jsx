@@ -4,9 +4,9 @@ import hamburgerMenu from "../assets/hamburgerMenu.svg";
 
 function Header({ setIsOpen, darkMode, setDarkMode }) {
   return (
-    <header className="bg-slate-700 p-3 flex justify-between items-center px-10">
-      <h1 className="text-white font-bold text-2xl">
-        Reddit<span className="text-blue-300">Lite</span>
+    <header className="bg-slate-700 p-3 flex justify-between items-center px-10 dark:bg-slate-900">
+      <h1 className="text-blue-400 font-bold text-2xl dark:text-white">
+        Reddit<span className="text-white dark:text-blue-300">Lite</span>
       </h1>
       <div className="flex gap-3 items-center">
         <DarkMode
