@@ -1,8 +1,8 @@
 function DarkMode() {
   return (
-    <div>
+    <div className="cursor-pointer">
       <svg
-        className="h-7"
+        className="h-6"
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
       >

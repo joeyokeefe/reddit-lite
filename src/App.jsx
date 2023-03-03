@@ -23,8 +23,9 @@ function App() {
   return (
     <div>
       <Header setIsOpen={setIsOpen} />
-      <div className="relative flex justify-center">
-        <div className="mx-4">
+      <div className="relative flex flex-col justify-center md:flex-row-reverse">
+        {isOpen && <SubredditNav subreddits={subreddits} />}
+        <div className="mx-4 mt-8">
           {posts.map((post) => (
             <Post
               key={post.data.id}
@@ -38,7 +39,6 @@ function App() {
             />
           ))}
         </div>
-        {isOpen && <SubredditNav subreddits={subreddits} />}
       </div>
     </div>
   );
