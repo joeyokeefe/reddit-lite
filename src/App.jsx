@@ -7,6 +7,7 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [subreddits, setSubreddits] = useState([]);
+  const [darkMode, setDarkMode] = useState("light");
 
   useEffect(() => {
     fetch("https://ww.reddit.com/r/popular.json")
@@ -20,9 +21,22 @@ function App() {
       .then((subredditsArr) => setSubreddits(subredditsArr.data.children));
   }, []);
 
+  useEffect(() => {
+    if (darkMode === "light") {
+      document.documentElement.classList.remove("dark");
+    }
+    if (darkMode === "dark") {
+      document.documentElement.classList.add("dark");
+    }
+  }, [darkMode]);
+
   return (
     <div>
-      <Header setIsOpen={setIsOpen} />
+      <Header
+        setIsOpen={setIsOpen}
+        darkMode={darkMode}
+        setDarkMode={setDarkMode}
+      />
       <div className="relative flex flex-col justify-center md:flex-row-reverse">
         {isOpen && <SubredditNav subreddits={subreddits} />}
         <div className="mx-4 mt-8">
