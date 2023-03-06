@@ -1,7 +1,7 @@
-function DarkMode({ darkMode, setDarkMode }) {
-  if (darkMode === "light") {
+function Theme({ theme, setTheme }) {
+  if (theme === "light") {
     return (
-      <div className="cursor-pointer" onClick={() => setDarkMode("dark")}>
+      <div className="cursor-pointer" onClick={() => setTheme("dark")}>
         <svg
           id="i-moon"
           xmlns="http://www.w3.org/2000/svg"
@@ -20,9 +20,9 @@ function DarkMode({ darkMode, setDarkMode }) {
     );
   }
 
-  if (darkMode === "dark") {
+  if (theme === "dark") {
     return (
-      <div className="cursor-pointer" onClick={() => setDarkMode("light")}>
+      <div className="cursor-pointer" onClick={() => setTheme("light")}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="icon icon-tabler icon-tabler-sun"
@@ -44,4 +44,4 @@ function DarkMode({ darkMode, setDarkMode }) {
   }
 }
 
-export default DarkMode;
+export default Theme;
