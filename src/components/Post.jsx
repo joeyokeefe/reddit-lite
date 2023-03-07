@@ -56,9 +56,9 @@ function Post({
             <g
               className="dark:stroke-white"
               stroke="#000"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
             >
               <circle cx="12" cy="12" r="10" />
               <path d="m12 6v6l4 4" />

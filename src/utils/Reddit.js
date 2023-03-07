@@ -1,6 +1,6 @@
 const SCOPE = "identity";
 const REDIRECT_URI = "http://127.0.0.1:5173";
-const RANDOM_STRING = "peep";
+const RANDOM_STRING = "beep";
 const RESPONSE_TYPE = "token";
 const CLIENT_ID = "uEWL6fiYDH1P7XCkUoXfTA";
 const URL = `https://www.reddit.com/api/v1/authorize?client_id=${CLIENT_ID}&response_type=${RESPONSE_TYPE}&state=${RANDOM_STRING}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}`;
@@ -26,12 +26,12 @@ const Reddit = {
       window.location = URL;
     }
   },
-  getUser(token) {
-    //const accessToken = this.getAccessToken();
+  getUser() {
+    const accessToken = this.getAccessToken();
     return fetch("https://oauth.reddit.com/api/v1/me", {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
   },

@@ -10,9 +10,9 @@ function Theme({ theme, setTheme }) {
           height="26"
           fill="none"
           stroke="white"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         >
           <path d="M14 2C 9 2 3 7 3 15 3 23 9 29 17 29 25 29 30 23 30 18 19 25 7 13 14 2Z" />
         </svg>
@@ -25,15 +25,15 @@ function Theme({ theme, setTheme }) {
       <div className="cursor-pointer" onClick={() => setTheme("light")}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="icon icon-tabler icon-tabler-sun"
+          className="icon icon-tabler icon-tabler-sun"
           width="30"
           height="30"
           viewBox="0 0 24 24"
-          stroke-width="2"
+          strokeWidth="2"
           stroke="white"
           fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <circle cx="12" cy="12" r="4" />

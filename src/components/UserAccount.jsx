@@ -1,6 +1,18 @@
-function UserAccount() {
-  return (
+import Reddit from "../utils/Reddit.js";
+
+function UserAccount({ user, setUser }) {
+  function signIn() {
+    Reddit.getUser()
+      .then((res) => res.json())
+      .then((data) => setUser(data));
+  }
+
+  return user ? (
     <div className="cursor-pointer">
+      <img src={user.icon_img} alt="" />
+    </div>
+  ) : (
+    <div className="cursor-pointer" onClick={signIn}>
       <svg
         height="28"
         viewBox="0 0 32 32"
