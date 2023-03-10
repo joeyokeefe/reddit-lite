@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Post from "../components/Post.jsx";
 import SubredditNav from "../components/SubredditNav.jsx";
 
-function Home({ isOpen, setIsOpen }) {
+function Home({ isOpen }) {
   const [posts, setPosts] = useState([]);
   const [subreddits, setSubreddits] = useState([]);
 

@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Subreddit from "./pages/Subreddit";
 import Header from "./components/Header";
 import { useEffect, useState } from "react";
+import Reddit from "./utils/Reddit";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +22,13 @@ function App() {
       localStorage.setItem("theme", "dark");
     }
   }, [theme]);
+
+  useEffect(() => {
+    Reddit.getAccessToken();
+    Reddit.getUser()
+      .then((res) => res.json())
+      .then((data) => setUser(data));
+  }, []);
 
   return (
     <BrowserRouter>
