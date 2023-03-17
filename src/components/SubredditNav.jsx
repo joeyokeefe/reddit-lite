@@ -6,9 +6,9 @@ function SubredditNav({ subreddits }) {
     <div className="bg-slate-400 p-6 text-center mb-4 w-80 self-end absolute right-0 top-0 dark:text-white dark:bg-slate-900 z-10">
       <h2 className="text-2xl font-bold mb-8">Subreddits</h2>
       {subreddits.map((subreddit) => (
-        <NavLink to={`/${subreddit.data.display_name_prefixed.split("/")[1]}`}>
+        <NavLink to={`/${subreddit.data.display_name_prefixed.split("/")[1]}`} key={subreddit.data.id}>
         <div
-          key={subreddit.data.id}
+          
           className="text-lg mt-6 flex flex-nowrap font-semibold cursor-pointer"
         >
           {subreddit.data.icon_img ? (

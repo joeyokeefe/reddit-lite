@@ -1,4 +1,4 @@
-const SCOPE = "identity mysubreddits";
+const SCOPE = "identity mysubreddits read";
 const REDIRECT_URI = "http://127.0.0.1:5173";
 const RANDOM_STRING = "beep";
 const RESPONSE_TYPE = "token";
@@ -38,6 +38,15 @@ const Reddit = {
   getSubredditList() {
     const accessToken = this.getAccessToken();
     return fetch("https://oauth.reddit.com/subreddits/mine/subscriber", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  },
+  getSubredditPosts(params) {
+    const accessToken = this.getAccessToken();
+    return fetch(`https://oauth.reddit.com/r/${params}/hot/`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,

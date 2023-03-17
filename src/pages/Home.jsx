@@ -2,16 +2,28 @@ import { useEffect, useState } from "react";
 import Post from "../components/Post.jsx";
 import SubredditNav from "../components/SubredditNav.jsx";
 import Reddit from "../utils/Reddit.js";
+import { useParams } from "react-router-dom";
 
 function Home({ isOpen, user }) {
   const [posts, setPosts] = useState([]);
   const [subreddits, setSubreddits] = useState([]);
+  const params = useParams();
+  
 
   useEffect(() => {
-    fetch("https://ww.reddit.com/r/popular.json")
+    if (!params.subreddit && !user) {
+      fetch("https://ww.reddit.com/r/popular.json")
+        .then((res) => res.json())
+        .then((postsArr) => setPosts(postsArr.data.children));
+    } else if (params.subreddit && !user) {
+      fetch(`https://www.reddit.com/r/${params.subreddit}.json`)
+        .then((res) => res.json())
+        .then((postsArr) => setPosts(postsArr.data.children));
+    }
+    Reddit.getSubredditPosts(params.subreddit)
       .then((res) => res.json())
       .then((postsArr) => setPosts(postsArr.data.children));
-  }, []);
+  }, [params]);
 
   useEffect(() => {
     if (!user) {

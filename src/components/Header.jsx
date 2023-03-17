@@ -1,15 +1,17 @@
 import Theme from "./Theme";
 import UserAccount from "./UserAccount";
 import hamburgerMenu from "../assets/hamburgerMenu.svg";
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 
 function Header({ setIsOpen, theme, setTheme, user, setUser }) {
   return (
     <>
       <header className="bg-slate-700 p-3 flex justify-between items-center px-10 dark:bg-slate-900">
+        <Link to="/">
         <h1 className="text-blue-400 font-bold text-2xl dark:text-white">
           R<span className="text-white dark:text-blue-300">Lite</span>
-        </h1>
+          </h1>
+          </Link>
         <div className="flex gap-3 items-center">
           <Theme className="cursor-pointer" theme={theme} setTheme={setTheme} />
           <UserAccount user={user} setUser={setUser} />
