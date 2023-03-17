@@ -1,4 +1,4 @@
-const SCOPE = "identity";
+const SCOPE = "identity mysubreddits";
 const REDIRECT_URI = "http://127.0.0.1:5173";
 const RANDOM_STRING = "beep";
 const RESPONSE_TYPE = "token";
@@ -35,9 +35,14 @@ const Reddit = {
       },
     });
   },
-  getSubReddit() {
+  getSubredditList() {
     const accessToken = this.getAccessToken();
-    return fetch("https://www.reddit.com/r/ProgrammerHumor.json%22");
+    return fetch("https://oauth.reddit.com/subreddits/mine/subscriber", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
   },
 };
 

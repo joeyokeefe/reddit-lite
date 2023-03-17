@@ -2,8 +2,8 @@ import Reddit from "../utils/Reddit.js";
 
 function UserAccount({ user }) {
   return user ? (
-    <div className="cursor-pointer">
-      <img src={user.icon_img} alt="" />
+    <div className="cursor-pointer w-16 rounded-3xl border-2 border-slate-500">
+      <img src={user.icon_img.match(/^(.+)\?/)[1]} alt="" />
     </div>
   ) : (
     <div className="cursor-pointer" onClick={() => Reddit.getAuthorization()}>

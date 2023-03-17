@@ -47,7 +47,7 @@ function App() {
         >
           <Route
             index
-            element={<Home isOpen={isOpen} setIsOpen={setIsOpen} />}
+            element={<Home isOpen={isOpen} user={user} />}
           />
           <Route path="/:subreddit" element={<Subreddit />} />
           <Route path="/dashboard" element={<Dashboard />} />

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import Post from "../components/Post.jsx";
 import SubredditNav from "../components/SubredditNav.jsx";
+import Reddit from "../utils/Reddit.js";
 
-function Home({ isOpen }) {
+function Home({ isOpen, user }) {
   const [posts, setPosts] = useState([]);
   const [subreddits, setSubreddits] = useState([]);
 
@@ -13,10 +14,16 @@ function Home({ isOpen }) {
   }, []);
 
   useEffect(() => {
-    fetch("https://www.reddit.com/subreddits/default.json")
-      .then((res) => res.json())
+    if (!user) {
+      fetch("https://www.reddit.com/subreddits/default.json")
+      .then((res) => res.json())  
       .then((subredditsArr) => setSubreddits(subredditsArr.data.children));
-  }, []);
+    }
+    Reddit.getSubredditList()
+        .then((res) => res.json())
+        .then((subredditsArr) => setSubreddits(subredditsArr.data.children));
+    
+  }, [user]);
 
   return (
     <div>

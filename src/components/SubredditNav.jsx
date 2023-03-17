@@ -1,10 +1,12 @@
 import defaultSubredditIcon from "../assets/defaultSubredditIcon.svg";
+import { NavLink } from "react-router-dom";
 
 function SubredditNav({ subreddits }) {
   return (
-    <div className="bg-slate-400 p-6 text-center mb-4 w-80 self-end absolute right-0 top-0 dark:text-white dark:bg-slate-900">
+    <div className="bg-slate-400 p-6 text-center mb-4 w-80 self-end absolute right-0 top-0 dark:text-white dark:bg-slate-900 z-10">
       <h2 className="text-2xl font-bold mb-8">Subreddits</h2>
       {subreddits.map((subreddit) => (
+        <NavLink to={`/${subreddit.data.display_name_prefixed.split("/")[1]}`}>
         <div
           key={subreddit.data.id}
           className="text-lg mt-6 flex flex-nowrap font-semibold cursor-pointer"
@@ -21,7 +23,8 @@ function SubredditNav({ subreddits }) {
             />
           )}
           {subreddit.data.display_name_prefixed}
-        </div>
+          </div>
+          </NavLink>
       ))}
     </div>
   );
