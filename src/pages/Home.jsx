@@ -8,6 +8,7 @@ function Home({ isOpen, user }) {
   const [posts, setPosts] = useState([]);
   const [subreddits, setSubreddits] = useState([]);
   const params = useParams();
+  const signInError = sessionStorage.getItem("declined") || null;
   
 
   useEffect(() => {
@@ -20,7 +21,7 @@ function Home({ isOpen, user }) {
         .then((res) => res.json())
         .then((postsArr) => setPosts(postsArr.data.children));
     }
-    Reddit.getSubredditPosts(params.subreddit)
+    Reddit.getSubredditPosts(params.subreddit || "popular")
       .then((res) => res.json())
       .then((postsArr) => setPosts(postsArr.data.children));
   }, [params]);
@@ -39,6 +40,7 @@ function Home({ isOpen, user }) {
 
   return (
     <div>
+      {signInError && <h1 className="text-red-600">{signInError}</h1>}
       <div className="relative flex flex-col justify-center md:flex-row-reverse dark:bg-slate-800">
         {isOpen && <SubredditNav subreddits={subreddits} />}
         <div className="mx-4 mt-8">

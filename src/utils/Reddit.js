@@ -15,13 +15,24 @@ const Reddit = {
       const accessTokenMatch =
         window.location.href.match(/access_token=([^&]*)/);
       const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/);
+      const error = window.location.href.match(/error=([^&]*)/)
 
       if (accessTokenMatch && expiresInMatch) {
+        sessionStorage.removeItem("declined");
         const token = accessTokenMatch[1];
         sessionStorage.setItem("accessToken", token);
         const expiresIn = Number(expiresInMatch[1]);
-        window.setTimeout(() => (accessToken = ""), expiresIn * 1000);
+        window.setTimeout(
+          () => sessionStorage.removeIten("accessToken"),
+          expiresIn * 1000);
         window.history.pushState("Access Token", null, "/");
+      }
+      if (error) {
+        window.history.pushState("Access Token", null, "/");
+        sessionStorage.setItem(
+          "declined",
+          "There was an error accessing your account or you declined to use Rlite"
+        );
       }
     }
     return accessToken;
