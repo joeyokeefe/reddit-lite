@@ -1,4 +1,4 @@
-const SCOPE = "identity mysubreddits read";
+const SCOPE = "identity mysubreddits read vote";
 const REDIRECT_URI = "http://127.0.0.1:5173";
 const RANDOM_STRING = "beep";
 const RESPONSE_TYPE = "token";
@@ -63,6 +63,15 @@ const Reddit = {
         Authorization: `Bearer ${accessToken}`,
       },
     });
+  },
+  vote(id, dir) {
+    const accessToken = this.getAccessToken();
+    return fetch(`https://oauth.reddit.com/api/vote?id=${id}&dir=${dir}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }).then((res) => res.json());
   },
 };
 

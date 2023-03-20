@@ -1,4 +1,6 @@
 import convertUTC from "../utils/convertUTC";
+import Reddit from "../utils/Reddit";
+import { useState } from "react";
 
 function Post({
   title,
@@ -8,28 +10,53 @@ function Post({
   created_utc,
   post_image,
   subreddit_name,
+  name
 }) {
+  const [vote, setVote] = useState(null);
+
+  function handleUpVote() {
+    if (vote === null || vote === "down") {
+      Reddit.vote(name,"1")
+      setVote("up");
+    } else {
+      Reddit.vote(name, "0")
+      setVote(null)
+    }
+  }
+
+  function handleDownVote() {
+    if (vote === null || vote === "up") {
+      Reddit.vote(name, "-1")
+      setVote("down");
+    } else {
+      Reddit.vote(name, "0")
+      setVote(null)
+    }
+  }
+
   return (
     <div className="relative flex justify-center mb-8 m-auto gap-12 shadow shadow-slate-500 p-5 xl:p-2 xl:max-w-6xl dark:text-white dark:bg-slate-700 dark:shadow-none">
-      <div className="absolute left-5 top-1/3 flex flex-col items-center gap-2">
+      <div className="absolute left-5 top-1/4 flex flex-col items-center gap-2 ">
         <svg
-          className="h-5 fill-orange-500 dark:fill-orange-400 cursor-pointer"
+          className={`stroke-2 stroke-orange-400 ${vote === "up" ? "fill-orange-400" : "fill-none"} cursor-pointer`}
           height="24"
           viewBox="0 0 24 24"
           width="24"
           xmlns="http://www.w3.org/2000/svg"
+          onClick={handleUpVote}
         >
-          <path d="m12.781 2.375c-.381-.475-1.181-.475-1.562 0l-8 10c-.24.301-.286.712-.12 1.059.167.345.516.566.901.566h2 2v3 4c0 .553.447 1 1 1h6c.553 0 1-.447 1-1v-5-2h2 2c.385 0 .734-.221.901-.566.166-.347.12-.758-.12-1.059zm2.219 9.625h-1v1 3 4h-4v-3-4-1h-1-2.919l5.919-7.399 5.919 7.399z" />
+          <path d="m4 14h2 2v3 4c0 .553.447 1 1 1h6c.553 0 1-.447 1-1v-5-2h1 3c.385 0 .734-.221.901-.566.166-.347.12-.758-.12-1.059l-8-10c-.381-.475-1.181-.475-1.562 0l-8 10c-.24.301-.286.712-.12 1.059.167.345.516.566.901.566z" />
         </svg>
         <p className="text-xs md:text-sm">{score}</p>
         <svg
-          className="h-5 fill-purple-500 dark:fill-purple-400 rotate-180 cursor-pointer"
+          className={`stroke-2 stroke-purple-400 ${vote === "down" ? "fill-purple-400" : "fill-none"} cursor-pointer`}
           height="24"
           viewBox="0 0 24 24"
           width="24"
           xmlns="http://www.w3.org/2000/svg"
+          onClick={handleDownVote}
         >
-          <path d="m12.781 2.375c-.381-.475-1.181-.475-1.562 0l-8 10c-.24.301-.286.712-.12 1.059.167.345.516.566.901.566h2 2v3 4c0 .553.447 1 1 1h6c.553 0 1-.447 1-1v-5-2h2 2c.385 0 .734-.221.901-.566.166-.347.12-.758-.12-1.059zm2.219 9.625h-1v1 3 4h-4v-3-4-1h-1-2.919l5.919-7.399 5.919 7.399z" />
+          <path d="m20.901 10.566c-.167-.345-.516-.566-.901-.566h-2-2v-3-4c0-.553-.447-1-1-1h-6c-.553 0-1 .447-1 1v5 2h-1-3c-.385 0-.734.221-.901.566-.166.347-.12.758.12 1.059l8 10c.19.237.477.375.781.375s.591-.138.781-.375l8-10c.24-.301.286-.712.12-1.059z" />
         </svg>
       </div>
       <div className="flex flex-col items-center text-center gap-4 w-3/4">
@@ -59,7 +86,7 @@ function Post({
           </div>
         </div>
         <h4 className="font text-xl">{title}</h4>
-        {/*{post_image && <img className="object-cover" src={post_image} alt="" />}*/}
+        {/* {post_image && <img className="" src={post_image} alt="" />} */}
         <div className="flex w-full justify-between">
           <div className="flex items-center gap-1">
             <svg

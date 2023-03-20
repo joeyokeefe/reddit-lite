@@ -49,11 +49,12 @@ function Home({ isOpen, user }) {
               key={post.data.id}
               title={post.data.title}
               subreddit_name={post.data.subreddit_name_prefixed}
-              /*post_image={post.data.url_overridden_by_dest}*/
+              post_image={post.data.url_overridden_by_dest}
               score={post.data.score}
               author={post.data.author}
               num_comments={post.data.num_comments}
               created_utc={post.data.created}
+              name={post.data.name}
             />
           ))}
         </div>
