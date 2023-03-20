@@ -10,27 +10,31 @@ function Post({
   created_utc,
   post_image,
   subreddit_name,
-  name
+  name,
+  isVideo,
+  video,
+  url,
+  thumbnail,
 }) {
   const [vote, setVote] = useState(null);
 
   function handleUpVote() {
     if (vote === null || vote === "down") {
-      Reddit.vote(name,"1")
+      Reddit.vote(name, "1");
       setVote("up");
     } else {
-      Reddit.vote(name, "0")
-      setVote(null)
+      Reddit.vote(name, "0");
+      setVote(null);
     }
   }
 
   function handleDownVote() {
     if (vote === null || vote === "up") {
-      Reddit.vote(name, "-1")
+      Reddit.vote(name, "-1");
       setVote("down");
     } else {
-      Reddit.vote(name, "0")
-      setVote(null)
+      Reddit.vote(name, "0");
+      setVote(null);
     }
   }
 
@@ -38,7 +42,9 @@ function Post({
     <div className="relative flex justify-center mb-8 m-auto gap-12 shadow shadow-slate-500 p-5 xl:p-2 xl:max-w-6xl dark:text-white dark:bg-slate-700 dark:shadow-none">
       <div className="absolute left-5 top-1/4 flex flex-col items-center gap-2 ">
         <svg
-          className={`stroke-2 stroke-orange-400 ${vote === "up" ? "fill-orange-400" : "fill-none"} cursor-pointer`}
+          className={`stroke-2 stroke-orange-400 ${
+            vote === "up" ? "fill-orange-400" : "fill-none"
+          } cursor-pointer`}
           height="24"
           viewBox="0 0 24 24"
           width="24"
@@ -49,7 +55,9 @@ function Post({
         </svg>
         <p className="text-xs md:text-sm">{score}</p>
         <svg
-          className={`stroke-2 stroke-purple-400 ${vote === "down" ? "fill-purple-400" : "fill-none"} cursor-pointer`}
+          className={`stroke-2 stroke-purple-400 ${
+            vote === "down" ? "fill-purple-400" : "fill-none"
+          } cursor-pointer`}
           height="24"
           viewBox="0 0 24 24"
           width="24"
@@ -59,7 +67,7 @@ function Post({
           <path d="m20.901 10.566c-.167-.345-.516-.566-.901-.566h-2-2v-3-4c0-.553-.447-1-1-1h-6c-.553 0-1 .447-1 1v5 2h-1-3c-.385 0-.734.221-.901.566-.166.347-.12.758.12 1.059l8 10c.19.237.477.375.781.375s.591-.138.781-.375l8-10c.24-.301.286-.712.12-1.059z" />
         </svg>
       </div>
-      <div className="flex flex-col items-center text-center gap-4 w-3/4">
+      <div className="flex flex-col items-center text-center gap-4 w-3/4 ml-14">
         <div className="flex w-full justify-start">
           <h5>{subreddit_name} - </h5>
           <div className="flex items-center">
@@ -85,8 +93,18 @@ function Post({
             <p className="text-xs md:text-sm">{convertUTC(created_utc)}</p>
           </div>
         </div>
-        <h4 className="font text-xl">{title}</h4>
-        {/* {post_image && <img className="" src={post_image} alt="" />} */}
+        <h4 className="font text-2xl font-bold">{title}</h4>
+        {isVideo && (
+          <video controls>
+            <source src={video} type="video/mp4" />
+          </video>
+        )}
+
+        {post_image && (
+          <a href={url} target="_blank">
+            <img className="" src={post_image} alt="" />
+          </a>
+        )}
         <div className="flex w-full justify-between">
           <div className="flex items-center gap-1">
             <svg
@@ -104,6 +122,20 @@ function Post({
               />
             </svg>
             <p className="text-xs md:text-sm">{author}</p>
+          </div>
+          <div>
+            <a href={url} target="_blank" className="flex items-center gap-1">
+              <svg
+                className="fill-white"
+                height="16"
+                viewBox="0 0 8 8"
+                width="12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="m5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47s-.41-.13-.41-.13a.5.5 0 1 0 -.5.88s.34.22.84.25 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0 -.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44s.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z" />
+              </svg>
+              <p className="text-xs md:text-sm">Link</p>
+            </a>
           </div>
           <div className="flex items-center gap-1">
             <svg
@@ -123,6 +155,13 @@ function Post({
             <p className="text-xs md:text-sm">{num_comments}</p>
           </div>
         </div>
+      </div>
+      <div className="self-center">
+        {thumbnail && !video && !post_image && (
+          <a href={url} target="_blank">
+            <img src={thumbnail} alt="" />
+          </a>
+        )}
       </div>
     </div>
   );

@@ -55,6 +55,10 @@ function Home({ isOpen, user }) {
               num_comments={post.data.num_comments}
               created_utc={post.data.created}
               name={post.data.name}
+              isVideo={post.data.is_video}
+              video={post.data?.media?.reddit_video?.fallback_url}
+              url={post.data?.url}
+              thumbnail={post.data?.thumbnail}
             />
           ))}
         </div>
