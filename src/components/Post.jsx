@@ -1,8 +1,9 @@
 import convertUTC from "../utils/convertUTC";
 import Reddit from "../utils/Reddit";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Post({
+  likes,
   title,
   score,
   author,
@@ -15,26 +16,42 @@ function Post({
   video,
   url,
   thumbnail,
+  locked,
+  user,
 }) {
   const [vote, setVote] = useState(null);
 
+  useEffect(() => {
+    if (user) {
+      setVote(likes);
+    }
+  }, [score]);
+
   function handleUpVote() {
-    if (vote === null || vote === "down") {
-      Reddit.vote(name, "1");
-      setVote("up");
-    } else {
-      Reddit.vote(name, "0");
-      setVote(null);
+    if (!user) {
+      Reddit.getAuthorization();
+    } else if (!locked) {
+      if (vote === null || vote === false) {
+        Reddit.vote(name, "1");
+        setVote(true);
+      } else {
+        Reddit.vote(name, "0");
+        setVote(null);
+      }
     }
   }
 
   function handleDownVote() {
-    if (vote === null || vote === "up") {
-      Reddit.vote(name, "-1");
-      setVote("down");
-    } else {
-      Reddit.vote(name, "0");
-      setVote(null);
+    if (!user) {
+      Reddit.getAuthorization();
+    } else if (!locked) {
+      if (vote === null || vote === true) {
+        Reddit.vote(name, "-1");
+        setVote(false);
+      } else {
+        Reddit.vote(name, "0");
+        setVote(null);
+      }
     }
   }
 
@@ -43,7 +60,7 @@ function Post({
       <div className="absolute left-5 top-1/4 flex flex-col items-center gap-2 ">
         <svg
           className={`stroke-2 stroke-orange-400 ${
-            vote === "up" ? "fill-orange-400" : "fill-none"
+            vote === true ? "fill-orange-400" : "fill-none"
           } cursor-pointer`}
           height="24"
           viewBox="0 0 24 24"
@@ -56,7 +73,7 @@ function Post({
         <p className="text-xs md:text-sm">{score}</p>
         <svg
           className={`stroke-2 stroke-purple-400 ${
-            vote === "down" ? "fill-purple-400" : "fill-none"
+            vote === false ? "fill-purple-400" : "fill-none"
           } cursor-pointer`}
           height="24"
           viewBox="0 0 24 24"

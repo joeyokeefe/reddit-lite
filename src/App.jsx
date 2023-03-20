@@ -6,6 +6,7 @@ import Subreddit from "./pages/Subreddit";
 import Header from "./components/Header";
 import { useEffect, useState } from "react";
 import Reddit from "./utils/Reddit";
+const isAllowed = JSON.parse(sessionStorage.getItem("allowed")) || null;
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,9 +26,11 @@ function App() {
 
   useEffect(() => {
     Reddit.getAccessToken();
-    Reddit.getUser()
-      .then((res) => res.json())
-      .then((data) => setUser(data));
+    if (isAllowed) {
+      Reddit.getUser()
+        .then((res) => res.json())
+        .then((data) => setUser(data));
+    }
   }, []);
 
   return (
@@ -45,11 +48,11 @@ function App() {
             />
           }
         >
+          <Route index element={<Home isOpen={isOpen} user={user} />} />
           <Route
-            index
+            path="/:subreddit"
             element={<Home isOpen={isOpen} user={user} />}
           />
-          <Route path="/:subreddit" element={<Home isOpen={isOpen} user={user} />}/>
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
       </Routes>

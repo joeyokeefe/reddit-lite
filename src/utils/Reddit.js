@@ -8,6 +8,7 @@ const URL = `https://www.reddit.com/api/v1/authorize?client_id=${CLIENT_ID}&resp
 const Reddit = {
   getAuthorization() {
     window.location = URL;
+    sessionStorage.setItem("allowed", "true");
   },
   getAccessToken() {
     const accessToken = sessionStorage.getItem("accessToken") || null;
@@ -33,6 +34,7 @@ const Reddit = {
           "declined",
           "There was an error accessing your account or you declined to use Rlite"
         );
+        sessionStorage.removeItem("allowed");
       }
     }
     return accessToken;

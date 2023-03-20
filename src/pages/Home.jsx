@@ -9,7 +9,6 @@ function Home({ isOpen, user }) {
   const [subreddits, setSubreddits] = useState([]);
   const params = useParams();
   const signInError = sessionStorage.getItem("declined") || null;
-  
 
   useEffect(() => {
     if (!params.subreddit && !user) {
@@ -20,22 +19,23 @@ function Home({ isOpen, user }) {
       fetch(`https://www.reddit.com/r/${params.subreddit}.json`)
         .then((res) => res.json())
         .then((postsArr) => setPosts(postsArr.data.children));
+    } else {
+      Reddit.getSubredditPosts(params.subreddit || "popular")
+        .then((res) => res.json())
+        .then((postsArr) => setPosts(postsArr.data.children));
     }
-    Reddit.getSubredditPosts(params.subreddit || "popular")
-      .then((res) => res.json())
-      .then((postsArr) => setPosts(postsArr.data.children));
   }, [params]);
 
   useEffect(() => {
     if (!user) {
       fetch("https://www.reddit.com/subreddits/default.json")
-      .then((res) => res.json())  
-      .then((subredditsArr) => setSubreddits(subredditsArr.data.children));
-    }
-    Reddit.getSubredditList()
         .then((res) => res.json())
         .then((subredditsArr) => setSubreddits(subredditsArr.data.children));
-    
+    } else {
+      Reddit.getSubredditList()
+        .then((res) => res.json())
+        .then((subredditsArr) => setSubreddits(subredditsArr.data.children));
+    }
   }, [user]);
 
   return (
@@ -59,6 +59,9 @@ function Home({ isOpen, user }) {
               video={post.data?.media?.reddit_video?.fallback_url}
               url={post.data?.url}
               thumbnail={post.data?.thumbnail}
+              locked={post.data?.locked}
+              user={user}
+              likes={post.data.likes}
             />
           ))}
         </div>
