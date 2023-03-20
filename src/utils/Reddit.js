@@ -1,5 +1,5 @@
 const SCOPE = "identity mysubreddits read vote";
-const REDIRECT_URI = "http://127.0.0.1:5173";
+const REDIRECT_URI = "https://r-lite.netlify.app/";
 const RANDOM_STRING = "beep";
 const RESPONSE_TYPE = "token";
 const CLIENT_ID = "uEWL6fiYDH1P7XCkUoXfTA";
