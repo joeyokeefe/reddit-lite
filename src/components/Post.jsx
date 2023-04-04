@@ -117,11 +117,8 @@ function Post({
           </video>
         )}
 
-        {post_image && (
-          <a href={url} target="_blank">
-            <img className="" src={post_image} alt="" />
-          </a>
-        )}
+        {post_image && <img className="" src={post_image} alt="" />}
+        
         <div className="flex flex-col items-center gap-2 md:flex-row w-full justify-between">
           <div className="flex items-center gap-1">
             <svg
