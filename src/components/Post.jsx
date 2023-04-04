@@ -113,12 +113,12 @@ function Post({
         <h4 className="font text-2xl font-bold">{title}</h4>
         {isVideo && (
           <video controls>
-            <source src={video} type="video/mp4" />
+            <source src={video} type="video/mp4" audio />
           </video>
         )}
 
-        {post_image && <img className="" src={post_image} alt="" />}
-        
+        {post_image ? <img className="" src={post_image} alt="" /> : null}
+
         <div className="flex flex-col items-center gap-2 md:flex-row w-full justify-between">
           <div className="flex items-center gap-1">
             <svg
