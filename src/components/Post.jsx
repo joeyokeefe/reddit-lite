@@ -85,8 +85,8 @@ function Post({
         </svg>
       </div>
       <div className="flex flex-col items-center text-center gap-4 w-3/4 ml-14">
-        <div className="flex w-full justify-start">
-          <h5>{subreddit_name} - </h5>
+        <div className="flex flex-col w-full justify-start items-start">
+          <h5 className="text-xl">{subreddit_name}</h5>
           <div className="flex items-center">
             <svg
               className="h-3"
@@ -122,7 +122,7 @@ function Post({
             <img className="" src={post_image} alt="" />
           </a>
         )}
-        <div className="flex w-full justify-between">
+        <div className="flex flex-col items-center gap-2 md:flex-row w-full justify-between">
           <div className="flex items-center gap-1">
             <svg
               className="h-3.5"
