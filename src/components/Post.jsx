@@ -173,13 +173,6 @@ function Post({
           </div>
         </div>
       </div>
-      <div className="self-center">
-        {thumbnail && !video && !post_image && (
-          <a href={url} target="_blank">
-            <img src={thumbnail} alt="" />
-          </a>
-        )}
-      </div>
     </div>
   );
 }
